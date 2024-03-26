@@ -361,6 +361,7 @@ exports.LoadUtils = () => {
             t: parseInt(new Date().getTime() / 1000),
             isNewMsg: true,
             type: 'chat',
+            wbotType: options.wbotType,
             ...ephemeralFields,
             ...locationOptions,
             ..._pollOptions,
@@ -550,7 +551,9 @@ exports.LoadUtils = () => {
         if (typeof msg.id.remote === 'object') {
             msg.id = Object.assign({}, msg.id, { remote: msg.id.remote._serialized });
         }
-
+        if (message.wbotType) {
+            msg.wbotType = message.wbotType;
+        }
         delete msg.pendingAckUpdate;
 
         return msg;

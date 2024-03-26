@@ -34,7 +34,12 @@ class Message extends Base {
          * @type {object}
          */
         this.id = data.id;
-
+        /**
+         * MediaKey that represents the sticker 'ID'
+         * @type {string}
+         */
+        this.wbotType = data.wbotType;
+        /**
         /**
          * ACK status for the message
          * @type {MessageAck}

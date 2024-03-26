@@ -834,6 +834,7 @@ class Client extends EventEmitter {
     /**
      * Message options.
      * @typedef {Object} MessageSendOptions
+     * @property {string} [wbotType] - Show wbot type to send message.
      * @property {boolean} [linkPreview=true] - Show links preview. Has no effect on multi-device accounts.
      * @property {boolean} [sendAudioAsVoice=false] - Send audio as voice message with a generated waveform
      * @property {boolean} [sendVideoAsGif=false] - Send video as gif
@@ -878,6 +879,7 @@ class Client extends EventEmitter {
             sendMediaAsSticker: options.sendMediaAsSticker,
             sendMediaAsDocument: options.sendMediaAsDocument,
             caption: options.caption,
+            wbotType: options.wbotType,
             quotedMessageId: options.quotedMessageId,
             parseVCards: options.parseVCards === false ? false : true,
             mentionedJidList: options.mentions || [],
