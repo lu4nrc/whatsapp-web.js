@@ -10,15 +10,9 @@ const repl = require("repl");
 
 const { Client, LocalAuth } = require("./index");
 
-const wwebVersion = '2.2407.3';
-
 const client = new Client({
     puppeteer: { headless: false },
     authStrategy: new LocalAuth(),
-    webVersionCache: {
-        type: "remote",
-        remotePath: `https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/${wwebVersion}.html`,
-    },
 });
 
 console.log("Initializing...");
