@@ -1,4 +1,6 @@
 const { Client, Location, Poll, List, Buttons, LocalAuth } = require('./index');
+const wwebVersion = '2.2407.3';
+
 
 const client = new Client({
     authStrategy: new LocalAuth(),
@@ -6,7 +8,11 @@ const client = new Client({
     puppeteer: { 
         // args: ['--proxy-server=proxy-server-that-requires-authentication.example.com'],
         headless: false
-    }
+    },
+    webVersionCache: {
+        type: 'remote',
+        remotePath: `https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/${wwebVersion}.html`,
+    },
 });
 
 client.initialize();
