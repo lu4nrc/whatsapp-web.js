@@ -2,7 +2,7 @@
 
 exports.WhatsWebURL = 'https://web.whatsapp.com/';
 
-/* exports.DefaultOptions = {
+ exports.DefaultOptions = {
     puppeteer: {
         headless: true,
         defaultViewport: null
@@ -20,9 +20,9 @@ exports.WhatsWebURL = 'https://web.whatsapp.com/';
     ffmpegPath: 'ffmpeg',
     bypassCSP: false,
     proxyAuthentication: undefined
-}; */
+}; 
 
-exports.DefaultOptions = {
+/* exports.DefaultOptions = {
     puppeteer: {
         headless: true,
         defaultViewport: null,
@@ -42,7 +42,7 @@ exports.DefaultOptions = {
     ffmpegPath: "ffmpeg",
     bypassCSP: false,
     proxyAuthentication: undefined,
-};
+}; */
 
 /**
  * Client status
