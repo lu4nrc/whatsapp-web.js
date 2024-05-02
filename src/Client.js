@@ -241,7 +241,7 @@ class Client extends EventEmitter {
                 if (this.options.qrMaxRetries > 0) {
                     qrRetries++;
                     if (qrRetries > this.options.qrMaxRetries) {
-                        this.emit(Events.DISCONNECTED, 'Max qrcode retries reached');
+                        this.emit(Events.DISCONNECTED, 'Máximo de tentativas de qrcode atingido');
                         await this.destroy();
                     }
                 }
@@ -374,6 +374,7 @@ class Client extends EventEmitter {
 
         // Register events
         await page.exposeFunction('onAddMessageEvent', msg => {
+            console.log(msg)
             if (msg.type === 'gp2') {
                 const notification = new GroupNotification(this, msg);
                 if (['add', 'invite', 'linked_group_join'].includes(msg.subtype)) {

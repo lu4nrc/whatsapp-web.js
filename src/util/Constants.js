@@ -1,6 +1,27 @@
 "use strict";
 
-exports.WhatsWebURL = "https://web.whatsapp.com/";
+exports.WhatsWebURL = 'https://web.whatsapp.com/';
+
+exports.DefaultOptions = {
+    puppeteer: {
+        headless: true,
+        defaultViewport: null
+    },
+    webVersion: '2.2346.52',
+    webVersionCache: {
+        type: 'local',
+    },
+    authTimeoutMs: 0,
+    qrMaxRetries: 0,
+    takeoverOnConflict: false,
+    takeoverTimeoutMs: 0,
+    userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36',
+    ffmpegPath: 'ffmpeg',
+    bypassCSP: false,
+    proxyAuthentication: undefined
+};
+
+/*exports.WhatsWebURL = "https://web.whatsapp.com/";
 
 exports.DefaultOptions = {
     puppeteer: {
@@ -22,7 +43,7 @@ exports.DefaultOptions = {
     ffmpegPath: "ffmpeg",
     bypassCSP: false,
     proxyAuthentication: undefined,
-};
+}; */
 
 /**
  * Client status
