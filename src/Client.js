@@ -95,37 +95,37 @@ class Client extends EventEmitter {
         let [browser, page] = [null, null];
 
         await this.authStrategy.beforeBrowserInitialized();
-
+    
         const puppeteerOpts = this.options.puppeteer;
         if (puppeteerOpts && puppeteerOpts.browserWSEndpoint) {
             browser = await puppeteer.connect(puppeteerOpts);
             page = await browser.newPage();
         } else {
             const browserArgs = [...(puppeteerOpts.args || [])];
-            if(!browserArgs.find(arg => arg.includes('--user-agent'))) {
+            if (!browserArgs.find(arg => arg.includes('--user-agent'))) {
                 browserArgs.push(`--user-agent=${this.options.userAgent}`);
             }
             // navigator.webdriver fix
             browserArgs.push('--disable-blink-features=AutomationControlled');
             //browserArgs.push('--no-sandbox'); //Usado caso seja instalado no modo root
-
-            browser = await puppeteer.launch({...puppeteerOpts, args: browserArgs});
+    
+            browser = await puppeteer.launch({ ...puppeteerOpts, args: browserArgs });
             page = (await browser.pages())[0];
         }
-
+    
         if (this.options.proxyAuthentication !== undefined) {
             await page.authenticate(this.options.proxyAuthentication);
         }
-      
+    
         await page.setUserAgent(this.options.userAgent);
         if (this.options.bypassCSP) await page.setBypassCSP(true);
-
+    
         this.pupBrowser = browser;
         this.pupPage = page;
-
+    
         await this.authStrategy.afterBrowserInitialized();
         await this.initWebVersionCache();
-
+    
         // ocVesion (isOfficialClient patch)
         await page.evaluateOnNewDocument(() => {
             const originalError = Error;
@@ -137,7 +137,7 @@ class Client extends EventEmitter {
                 return error;
             };
         });
-        
+    
         await page.goto(WhatsWebURL, {
             waitUntil: 'load',
             timeout: 0,
@@ -744,6 +744,20 @@ class Client extends EventEmitter {
                 await this.destroy();
             }
         });
+
+            // Monitor memory usage and restart browser if it exceeds 3200 MB
+    const maxMemoryUsageMB = 3200;
+    setInterval(async () => {
+        const metrics = await page.metrics();
+        const memoryUsageMB = metrics.JSHeapTotalSize / 1024 / 1024;
+        if (memoryUsageMB > maxMemoryUsageMB) {
+            console.warn(`Memory usage exceeded ${maxMemoryUsageMB} MB. Restarting browser...`);
+            await this.destroy();
+            await this.initialize();
+        } else {
+            console.warn(`Memory usage ${memoryUsageMB} MB..`);
+        }
+    }, 60000); 
     }
 
     async initWebVersionCache() {
