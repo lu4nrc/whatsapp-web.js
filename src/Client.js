@@ -746,7 +746,7 @@ class Client extends EventEmitter {
         });
 
             // Monitor memory usage and restart browser if it exceeds 3200 MB
-    const maxMemoryUsageMB = 3200;
+/*     const maxMemoryUsageMB = 3200;
     setInterval(async () => {
         const metrics = await page.metrics();
         const memoryUsageMB = metrics.JSHeapTotalSize / 1024 / 1024;
@@ -757,8 +757,8 @@ class Client extends EventEmitter {
         } else {
             console.warn(`Memory usage ${memoryUsageMB} MB..`);
         }
-    }, 60000); 
-    }
+    }, 60000); */
+    } 
 
     async initWebVersionCache() {
         const { type: webCacheType, ...webCacheOptions } = this.options.webVersionCache;
